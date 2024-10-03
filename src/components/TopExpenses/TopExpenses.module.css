@@ -1,0 +1,16 @@
+.wrapper {
+  background-color: #3b3b3b;
+  color: #ffffff;
+  h3 {
+    margin: 0px;
+    font-style: italic;
+  }
+  width: 30%;
+  height: 100%;
+}
+.innerWrapper {
+  background-color: #FFFFFF;
+  border-radius: 10px;
+  margin-top: 0.5rem;
+  height: 85%;
+}
