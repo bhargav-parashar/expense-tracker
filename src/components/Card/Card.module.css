@@ -1,0 +1,22 @@
+.wrapper{
+    height: 100%;
+    width: 47%;
+    background-color: #9B9B9B;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+.labelFont{
+    font-size: 2vw;
+}
+.valueGreen{
+    font-weight:bold; 
+    color:  #9DFF5B;
+}
+.valueOrange{
+    font-weight:bold; 
+    color: #F4BB4A
+}

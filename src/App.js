@@ -1,9 +1,11 @@
-import Container from "./components/Container/Container";
+import Home from "../src/Pages/Home";
+import { SnackbarProvider } from "notistack";
+
 function App() {
   return (
-    <div>
-      <Container />
-    </div>
+    <SnackbarProvider>
+      <Home />
+    </SnackbarProvider>
   );
 }
 
