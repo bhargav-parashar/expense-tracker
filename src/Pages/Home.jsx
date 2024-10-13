@@ -8,26 +8,42 @@ import PieChartComponent from "../components/PieChart/PieChart.jsx";
 import AddExpense from "../components/Modals/AddExpense.jsx";
 import AddBalance from "../components/Modals/AddBalance.jsx";
 
+/*Custom hook*/
+const useLocalStorage = (key, initialValue) => {
+  const [value, setValue] = useState(() => {
+    const item = localStorage.getItem(key);
+    return item ? JSON.parse(item) : initialValue;
+  });
+
+  useEffect(() => {
+    localStorage.setItem(key, JSON.stringify(value));
+  }, [key, value]);
+
+  return [value, setValue];
+};
+
+const calculateCategoryStatistics = (expenseList) => {
+  return expenseList.reduce(
+    (acc, item) => {
+      acc.spends[item.category] =(acc.spends[item.category] || 0) + Number(item.price);
+      acc.counts[item.category] = (acc.counts[item.category] || 0) + 1;
+      return acc;
+    },
+    {
+      spends: { food: 0, entertainment: 0, travel: 0 },
+      counts: { food: 0, entertainment: 0, travel: 0 },
+    }
+  );
+};
+
 const Home = () => {
-  /*Custom hook*/
-  const useLocalStorage = (key, initialValue) => {
-    const [value, setValue] = useState(() => {
-      const item = localStorage.getItem(key);
-      return item ? JSON.parse(item) : initialValue;
-    });
-
-    useEffect(() => {
-      localStorage.setItem(key, JSON.stringify(value));
-    }, [key, value]);
-
-    return [value, setValue];
-  };
-
   const [balance, setBalance] = useLocalStorage("balance", 5000);
   const [expenseList, setExpenseList] = useLocalStorage("expenses", []);
 
   const [isIncomeOpen, setIsIncomeOpen] = useState(false);
   const [isExpenseOpen, setIsExpenseOpen] = useState(false);
+
+  const { spends: categorySpends, counts: categoryCounts } = calculateCategoryStatistics(expenseList);
 
   const addIncome = () => {
     setIsIncomeOpen(true);
@@ -35,7 +51,10 @@ const Home = () => {
   const addExpense = () => {
     setIsExpenseOpen(true);
   };
-  const expense = expenseList.reduce((acc,curr)=>acc + Number(curr.price),0);
+  const expense = expenseList.reduce(
+    (acc, curr) => acc + Number(curr.price),
+    0
+  );
 
   return (
     <div className={styles.wrapper}>
@@ -58,9 +77,15 @@ const Home = () => {
             handleClick={addExpense}
           />
         </div>
-        <div className={styles.chart}>
-          <PieChartComponent />
-        </div>
+        {/* <div className={styles.chart}> */}
+          <PieChartComponent
+            data={[
+              { name: "Food", value: categorySpends.food},
+              { name: "Enterntainment", value: categorySpends.entertainment },
+              { name: "Travel", value: categorySpends.travel}
+            ]}
+          />
+        {/* </div> */}
       </section>
       <Modal isOpen={isExpenseOpen} setIsOpen={setIsExpenseOpen}>
         <AddExpense
