@@ -1,46 +1,45 @@
-.button{
-    background: #E3E3E3;
-    border:0;
-    font-weight: 700;
-    font-size: 1rem;
-    border-radius: 15px;
-    padding:1vw 1.5vw;
-    color:#000;
-    cursor: pointer;  
-    font-size:1vw; 
+.button {
+  background: #e3e3e3;
+  border: 0;
+  font-weight: 700;
+  font-size: 1rem;
+  border-radius: 15px;
+  padding: 1vw 1.5vw;
+  color: #000;
+  cursor: pointer;
+  font-size: 1vw;
 }
 @media (max-width: 767px) {
-    .button{
-        font-size:4vw; 
-        padding:2vw 2.5vw;
-    }
+  .button {
+    font-size: 4vw;
+    padding: 2vw 2.5vw;
   }
-  @media (min-width: 768px) {
-    .button{
-        font-size:1vw; 
-    }
+}
+@media (min-width: 768px) {
+  .button {
+    font-size: 1vw;
   }
-.red{
-    background: linear-gradient(90deg, #FF9595 0%, #FF4747 80%, #FF3838 100%);
-    color: white;
 }
-.green{
-    background: linear-gradient(90deg, #B5DC52 0%, #89E148 100%);
-    color: white;
+.red {
+  background: linear-gradient(90deg, #ff9595 0%, #ff4747 80%, #ff3838 100%);
+  color: white;
 }
-
-
-.primary{
-    background: #F4BB4A;
-    color: #FFFFFF;
+.green {
+  background: linear-gradient(90deg, #b5dc52 0%, #89e148 100%);
+  color: white;
 }
 
-.secondary{
-    background: #E3E3E3;
-    color:#000;
-    font-weight: 400;
+.primary {
+  background: #f4bb4a;
+  color: #ffffff;
 }
 
-.shadow{
-    box-shadow: 0 4px 4px rgba(0,0,0,0.25);
+.secondary {
+  background: #e3e3e3;
+  color: #000;
+  font-weight: 400;
+}
+
+.shadow {
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
 }

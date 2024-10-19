@@ -1,7 +1,7 @@
 import styles from "./AddBalance.module.css";
 import react, { useState } from "react";
 import { useSnackbar } from "notistack";
-import Button from "../Buttons/Button";
+import Button from "../../Buttons/Button";
 
 const AddBalance = ({ setIsOpen, setBalance }) => {
   const [income, setIncome] = useState("");

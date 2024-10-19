@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styles from "./AddExpense.module.css";
-import Button from "../Buttons/Button";
+import Button from "../../Buttons/Button";
 import { useSnackbar } from "notistack";
 
 const AddExpense = ({
@@ -9,13 +9,17 @@ const AddExpense = ({
   setBalance,
   expenseList,
   setExpenseList,
+  editId,
 }) => {
-  const [expenseData, setExpenseData] = useState({
-    title: "",
-    price: "",
-    category: "",
-    date: "",
-  });
+  const initialData = editId
+    ? expenseList.find((item) => item.id === editId)
+    : {
+        title: "",
+        price: "",
+        category: "",
+        date: "",
+      };
+  const [expenseData, setExpenseData] = useState(initialData);
 
   const { enqueueSnackbar } = useSnackbar();
 
@@ -25,36 +29,84 @@ const AddExpense = ({
   };
   const handleAdd = (e) => {
     e.preventDefault();
-
+    /*Balance Validation */
     if (balance < expenseData.price) {
-      enqueueSnackbar("Price should be less than Wallet Balance", {
+      enqueueSnackbar("Price should be less than the Wallet Balance", {
         variant: "warning",
       });
       setIsOpen(false);
       return;
     }
-
+    /*Update Wallet Balance */
     setBalance((prev) => prev - Number(expenseData.price));
     
+    /*Create Transaction Id */
     const lastInsertId = expenseList.length > 0 ? expenseList[0].id : 0;
-    setExpenseList((prev)=>[{...expenseData, id: lastInsertId + 1},...prev]);
-
+    setExpenseList((prev) => [
+      { ...expenseData, id: lastInsertId + 1 },
+      ...prev,
+    ]);
+    
+    /*Refresh expense Data */
     setExpenseData({
-        title: "",
-        price: "",
-        category: "",
-        date: "",
+      title: "",
+      price: "",
+      category: "",
+      date: "",
     });
 
+    /*Close Modal */
     setIsOpen(false);
   };
 
+  const handleEdit = (e) =>{
+    e.preventDefault();
+
+    /*Update the item in main transaction list */
+    const editedList = expenseList.map((item)=>{
+      if(item.id === editId){
+        const priceDiff = item.price - expenseData.price;
+
+        /*Price Validation */
+        if(priceDiff < 0 && Math.abs(priceDiff) > balance){
+
+          enqueueSnackbar("Price should be less than the Wallet Balance", {
+            variant: "warning",
+          });
+          /*Close Modal */
+          setIsOpen(false);
+          /*Return the same item as in main transaction list */
+          return{...item};
+
+        }
+        
+        /*Update Wallet Balance */
+        setBalance((prev)=>prev + priceDiff);
+
+        /*Return updated item along with edit id */
+        return {...expenseData, id:editId};
+
+
+      }else{
+        return item;
+      }
+    })
+
+    /*Set Updated Transaction list as main Transaction list */
+    setExpenseList(editedList);
+
+    /*Close Modal */
+    setIsOpen(false);
+  };
   return (
     <div>
       <header>
-        <h2 style={{ marginTop: "0px" }}>Add Expense</h2>
+        <h2 style={{ marginTop: "0px" }}>{ editId?"Edit Expense" : "Add Expense"}</h2>
       </header>
-      <form className={styles.wrapper} onSubmit={handleAdd}>
+      <form
+        className={styles.wrapper}
+        onSubmit={editId ? handleEdit : handleAdd}
+      >
         <div>
           <input
             type="text"
@@ -82,6 +134,7 @@ const AddExpense = ({
             className={styles.inputs}
             name="category"
             id="category"
+            value={expenseData.category}
             onChange={handleChange}
             required
           >
@@ -103,7 +156,12 @@ const AddExpense = ({
             onChange={handleChange}
           />
         </div>
-        <Button buttonText="Add Expense" buttonStyle="primary" shadow type="submit"/>
+        <Button
+          buttonText="Add Expense"
+          buttonStyle="primary"
+          shadow
+          type="submit"
+        />
         <Button
           buttonText="Cancel"
           buttonStyle="secondary"

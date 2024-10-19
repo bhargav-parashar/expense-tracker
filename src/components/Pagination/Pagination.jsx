@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from "./Pagination.module.css";
 import { HiOutlineArrowLongLeft } from "react-icons/hi2";
 import { HiOutlineArrowLongRight } from "react-icons/hi2";

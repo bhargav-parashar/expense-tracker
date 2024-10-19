@@ -3,8 +3,8 @@ import styles from "./Home.module.css";
 import Modal from "../components/Modals/Modal";
 import Card from "../components/Card/Card.jsx";
 import PieChartComponent from "../components/PieChart/PieChart.jsx";
-import AddExpense from "../components/Modals/AddExpense.jsx";
-import AddBalance from "../components/Modals/AddBalance.jsx";
+import AddExpense from "../components/Forms/AddExpense/AddExpense.jsx";
+import AddBalance from "../components/Forms/AddExpense/AddExpense.jsx";
 import Barchart from "../components/BarChart/BarChart.jsx";
 import RecentTransactions from "../components/RecentTransactions/RecentTransactions.jsx";
 
@@ -91,7 +91,9 @@ const Home = () => {
         <RecentTransactions
           transactions={expenseList}
           setTransactions={setExpenseList}
+          balance = {balance}
           setBalance={setBalance}
+          expenseList = {expenseList}
           setExpenseList = {setExpenseList}
         />
         <Barchart
@@ -115,10 +117,6 @@ const Home = () => {
         <AddBalance setIsOpen={setIsIncomeOpen} setBalance={setBalance} />
       </Modal>
     </div>
-    //  <div className={styles.innerWrapper}>
-    //     <RecentTransactions />
-    //     <TopExpenses />
-    //   </div>
   );
 };
 export default Home;

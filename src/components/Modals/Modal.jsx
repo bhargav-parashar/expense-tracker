@@ -1,6 +1,4 @@
-import React, { Children } from "react";
-import AddBalance from "../Modals/AddBalance";
-import AddExpense from "../Modals/AddExpense";
+import React from "react";
 import Modal from "react-modal";
 
 Modal.setAppElement("#root");
@@ -19,7 +17,7 @@ export default function ModalWrapper({ children, isOpen, setIsOpen }) {
       padding: "2rem",
       height: "fit-content",
       border: "none",
-      minWidth:"300px"
+      minWidth: "300px",
     },
   };
 
@@ -30,7 +28,6 @@ export default function ModalWrapper({ children, isOpen, setIsOpen }) {
         onRequestClose={handleClose}
         shouldCloseOnOverlayClick={true}
         style={myStyles}
-        
       >
         {children}
       </Modal>

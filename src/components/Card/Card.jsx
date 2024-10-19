@@ -1,4 +1,4 @@
-import react, { useState, useEffect, useContext } from "react";
+import react from "react";
 import styles from "./Card.module.css";
 import Button from "../Buttons/Button";
 

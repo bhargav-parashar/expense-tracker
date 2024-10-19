@@ -1,15 +1,15 @@
-import React, { PureComponent } from "react";
+import React from "react";
 import NoTransactionsCard from "../NoTransactionsCard/NoTransactionsCard";
 
 import {
   BarChart,
   Bar,
-  // Cell,
+  Cell,
   XAxis,
   YAxis,
-  // CartesianGrid,
-  // Tooltip,
-  // Legend,
+  CartesianGrid,
+  Tooltip,
+  Legend,
   ResponsiveContainer,
 } from "recharts";
 import styles from "./BarChart.module.css";
@@ -45,7 +45,7 @@ const BarchartComp = ({ data }) => {
     return (
       <div className={styles.expenseChart}>
         <h3>Top Expenses</h3>
-        <NoTransactionsCard/>
+        <NoTransactionsCard />
       </div>
     );
   }
