@@ -19,6 +19,7 @@ export default function ModalWrapper({ children, isOpen, setIsOpen }) {
       padding: "2rem",
       height: "fit-content",
       border: "none",
+      minWidth:"300px"
     },
   };
 
@@ -29,6 +30,7 @@ export default function ModalWrapper({ children, isOpen, setIsOpen }) {
         onRequestClose={handleClose}
         shouldCloseOnOverlayClick={true}
         style={myStyles}
+        
       >
         {children}
       </Modal>

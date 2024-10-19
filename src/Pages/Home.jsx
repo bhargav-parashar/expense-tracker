@@ -1,12 +1,12 @@
 import react, { useState, useEffect } from "react";
 import styles from "./Home.module.css";
-import RecentTransactions from "../components/RecentTransactions/RecentTransactions";
-import TopExpenses from "../components/TopExpenses/TopExpenses";
 import Modal from "../components/Modals/Modal";
 import Card from "../components/Card/Card.jsx";
 import PieChartComponent from "../components/PieChart/PieChart.jsx";
 import AddExpense from "../components/Modals/AddExpense.jsx";
 import AddBalance from "../components/Modals/AddBalance.jsx";
+import Barchart from "../components/BarChart/BarChart.jsx";
+import RecentTransactions from "../components/RecentTransactions/RecentTransactions.jsx";
 
 /*Custom hook*/
 const useLocalStorage = (key, initialValue) => {
@@ -25,7 +25,8 @@ const useLocalStorage = (key, initialValue) => {
 const calculateCategoryStatistics = (expenseList) => {
   return expenseList.reduce(
     (acc, item) => {
-      acc.spends[item.category] =(acc.spends[item.category] || 0) + Number(item.price);
+      acc.spends[item.category] =
+        (acc.spends[item.category] || 0) + Number(item.price);
       acc.counts[item.category] = (acc.counts[item.category] || 0) + 1;
       return acc;
     },
@@ -43,7 +44,8 @@ const Home = () => {
   const [isIncomeOpen, setIsIncomeOpen] = useState(false);
   const [isExpenseOpen, setIsExpenseOpen] = useState(false);
 
-  const { spends: categorySpends, counts: categoryCounts } = calculateCategoryStatistics(expenseList);
+  const { spends: categorySpends, counts: categoryCounts } =
+    calculateCategoryStatistics(expenseList);
 
   const addIncome = () => {
     setIsIncomeOpen(true);
@@ -59,33 +61,46 @@ const Home = () => {
   return (
     <div className={styles.wrapper}>
       <h2>Expense Tracker</h2>
-      <section className={styles.heroWrapper}>
-        <div className={styles.heroInnerWrapper}>
-          <Card
-            label="Wallet Balance"
-            val={balance}
-            buttonText="+ Add Income"
-            buttonStyle="green"
-            handleClick={addIncome}
-          />
+      <section className={styles.heroWrapperMain}>
+        <Card
+          label="Wallet Balance"
+          val={balance}
+          buttonText="+ Add Income"
+          buttonStyle="green"
+          handleClick={addIncome}
+        />
 
-          <Card
-            label="Expenses"
-            val={expense}
-            buttonText="+ Add Expense"
-            buttonStyle="red"
-            handleClick={addExpense}
-          />
-        </div>
-        {/* <div className={styles.chart}> */}
-          <PieChartComponent
-            data={[
-              { name: "Food", value: categorySpends.food},
-              { name: "Enterntainment", value: categorySpends.entertainment },
-              { name: "Travel", value: categorySpends.travel}
-            ]}
-          />
-        {/* </div> */}
+        <Card
+          label="Expenses"
+          val={expense}
+          buttonText="+ Add Expense"
+          buttonStyle="red"
+          handleClick={addExpense}
+        />
+
+        <PieChartComponent
+          data={[
+            { name: "Food", value: categorySpends.food },
+            { name: "Enterntainment", value: categorySpends.entertainment },
+            { name: "Travel", value: categorySpends.travel },
+          ].filter((item) => item.value)}
+        />
+      </section>
+
+      <section className={styles.secondaryWrapper}>
+        <RecentTransactions
+          transactions={expenseList}
+          setTransactions={setExpenseList}
+          setBalance={setBalance}
+          setExpenseList = {setExpenseList}
+        />
+        <Barchart
+          data={[
+            { name: "Food", value: categoryCounts.food },
+            { name: "Entertainment", value: categoryCounts.entertainment },
+            { name: "Travel", value: categoryCounts.travel },
+          ].filter((item) => item.value)}
+        />
       </section>
       <Modal isOpen={isExpenseOpen} setIsOpen={setIsExpenseOpen}>
         <AddExpense

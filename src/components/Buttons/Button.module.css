@@ -4,10 +4,22 @@
     font-weight: 700;
     font-size: 1rem;
     border-radius: 15px;
-    padding:12px 30px;
+    padding:1vw 1.5vw;
     color:#000;
-    cursor: pointer;   
+    cursor: pointer;  
+    font-size:1vw; 
 }
+@media (max-width: 767px) {
+    .button{
+        font-size:4vw; 
+        padding:2vw 2.5vw;
+    }
+  }
+  @media (min-width: 768px) {
+    .button{
+        font-size:1vw; 
+    }
+  }
 .red{
     background: linear-gradient(90deg, #FF9595 0%, #FF4747 80%, #FF3838 100%);
     color: white;

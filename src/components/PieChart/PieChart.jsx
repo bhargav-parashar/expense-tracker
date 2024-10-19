@@ -1,4 +1,5 @@
-import React, { useCallback, useState } from "react";
+import React from "react";
+import NoTransactionsCard from "../NoTransactionsCard/NoTransactionsCard";
 import {
   PieChart,
   Pie,
@@ -7,8 +8,6 @@ import {
   ResponsiveContainer,
   Legend,
 } from "recharts";
-
-
 
 const COLORS = ["#A000FF", "#FF9304", "#FDE006"];
 
@@ -38,26 +37,31 @@ const renderCustomizedLabel = ({
     </text>
   );
 };
-export default function PieChartComponent({data}) {
-  return (
-    <ResponsiveContainer width="30%" height={250}>
-    <PieChart width={400} height={400}>
-      <Pie
-        data={data}
-        labelLine={false}
-        label={renderCustomizedLabel}
-        outerRadius={80}
-        fill="#8884d8"
-        dataKey="value"
-        isAnimationActive={true}
-       
-      >
-        {data.map((entry, index) => (
-          <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-        ))}
-      </Pie>
-      <Legend iconType="rect" verticalAlign="bottom" />
-    </PieChart>
-    </ResponsiveContainer>
-  );
+export default function PieChartComponent({ data }) {
+  if (data.length > 0) {
+    return (
+      <ResponsiveContainer width="100%" height={200}>
+        <PieChart width={400} height={400}>
+          <Pie
+            data={data}
+            labelLine={false}
+            label={renderCustomizedLabel}
+            outerRadius={80}
+            fill="#8884d8"
+            dataKey="value"
+            isAnimationActive={true}
+          >
+            {data.map((entry, index) => (
+              <Cell
+                key={`cell-${index}`}
+                fill={COLORS[index % COLORS.length]}
+              />
+            ))}
+          </Pie>
+          <Legend iconType="rect" verticalAlign="bottom" />
+        </PieChart>
+      </ResponsiveContainer>
+    );
+  }
+  return <NoTransactionsCard />;
 }

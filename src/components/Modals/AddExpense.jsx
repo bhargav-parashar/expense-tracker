@@ -63,6 +63,7 @@ const AddExpense = ({
             className={styles.inputs}
             value={expenseData.title}
             onChange={handleChange}
+            required
           />
         </div>
         <div>
@@ -73,6 +74,7 @@ const AddExpense = ({
             className={styles.inputs}
             value={expenseData.price}
             onChange={handleChange}
+            required
           />
         </div>
         <div>
@@ -81,6 +83,7 @@ const AddExpense = ({
             name="category"
             id="category"
             onChange={handleChange}
+            required
           >
             <option value="" disabled selected>
               Select Category

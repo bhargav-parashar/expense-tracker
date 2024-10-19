@@ -1,0 +1,26 @@
+.wrapper {
+  display: flex;
+  gap: 10px;
+  margin-top: 5px;
+}
+.buttons {
+  background:  #f1f1f1;
+  box-shadow: 0px 4px 4px 0px #00000040;
+  border-radius: 40%;
+  height: 2rem;
+  width: 2rem;
+  border-color: transparent;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+.currentPage{
+  display: flex;
+  height: 2rem;
+  width: 2rem;
+  align-items: center;
+  justify-content: center;
+  background: #43967B;
+  color: white;
+  border-radius: 5px;
+}

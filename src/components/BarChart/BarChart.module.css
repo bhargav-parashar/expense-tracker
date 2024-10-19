@@ -1,0 +1,24 @@
+
+.expenseChart h3 {
+    color: #fff;
+    font-style: italic;
+    margin-bottom: 10px;  
+  }
+  
+  .wrapper {
+    background: #fff;
+    border-radius: 10px;
+    padding: 5px 20px;
+    
+  }
+  
+  /*767*/
+  @media (max-width: 825px) {
+    .expenseChart h2 {
+      text-align: center;
+    }
+    .expenseChart{
+      height: fit-content;
+    }
+  }
+  

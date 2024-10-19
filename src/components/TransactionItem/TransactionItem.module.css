@@ -1,0 +1,68 @@
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  color: black;
+  margin: 12px 0px;
+}
+hr {
+  border: 1px solid #9b9b9b;
+}
+.detailsWrapper {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  background-color: white;
+  color: black;
+  margin: 12px 0px;
+}
+.details {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+.details p {
+  margin: 0px;
+}
+.date {
+  color: #9b9b9b;
+}
+.price {
+  color: #f4bb4a;
+  font-weight: bold;
+  margin-right: 15px;
+}
+.buttonWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+.buttonWrapper button {
+  height: 2rem;
+  width: 2rem;
+  box-shadow: 0px 4px 4px 0px #00000040;
+  border-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 40%;
+  cursor: pointer;
+  color: white;
+}
+.edit {
+  background-color: #ff3e3e;
+}
+.delete {
+  background-color: #f4bb4a;
+}
+
+.iconWrapper {
+  border-radius: 50%;
+  background: #d9d9d9;
+  padding: 10px;
+  height: 15px;
+  width: 15px;
+}
